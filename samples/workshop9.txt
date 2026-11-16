@@ -1,0 +1,104 @@
+159102 workshop – Week 9 
+ 
+ 
+1. What is the resolution of the screen you are using?  You can usually find this by looking at 
+ Settings and Display or by searching online for “what is my screen resolution”.  You will find a 
+ number of apps that display this information for you. 
+ (if you are unable to do this, don’t worry about it) 
+ 
+ 
+2. Find a useful website to help you answer the following.  You could try using: 
+ https://www.rapidtables.com/web/color/RGB_Color.html 
+ (a) RGB values for a nice shade of yellow 
+ (b) RGB values for a nice shade of purple 
+ (c) RGB values for a nice shade of brown 
+ No real answer for these – it is entirely up to you. 
+ 
+ 
+3. Cyan is a colour that is talked about a lot.  You should be aware what cyan looks like.  Write a 
+ program to display a cyan rectangle.  The RGB values are 0  255  255. 
+ These are the RGB values for “standard” cyan.  Then people get onto “dark cyan”, etc... 
+ 
+ 
+4. What colour do you get if the three RGB values are the same?  E.g. 150, 150, 150.  Leave out the 
+ small numbers because we know that 0, 0, 0 is black.  And leave out the large numbers because 
+ we know that 255, 255, 255 is white.  Look somewhere in between.  Note that this colour can 
+ appear in many shades. 
+ 
+ 
+5. Assume you want to write a program to create an image in a file called smallimage.ppm.  Your 
+ image is going to be 400 pixels down the screen and 250 pixels across the screen.  Write down the 
+ first four lines that will appear in the file called smallimage.ppm. 
+ 
+ 
+6**. Find (or invent) an interesting flag.  Modify program 3 in the notes to create the image of this 
+ flag.  WARNING – some flags are very challenging.  The flags of NZ or Australia are very 
+ difficult to get right and the flag of Brazil is a total nightmare. 
+ 
+ 
+7. What does the following system command do:   F: 
+ (if you are unable to do this on your computer, don’t worry about it) 
+ 
+ 
+8. The following program is meant to create the image of a green rectangle.  However there are five 
+ (5) errors in the program.  Identify each error and state what needs to be done to correct it. 
+ 
+#include <iostream> 
+#include <fstream> 
+using namespace std; 
+ 
+class pixel_class { 
+private: 
+  int red, green, blue; 
+public: 
+  void loaddata(int v1, int v2, int v3); 
+  void datatofile(fstream ppmfile); 
+  int getR() { return red; } 
+  int getG() { return green; } 
+  int getB() { return blue; } 
+}; 
+ 
+void createpicture(); 
+ 
+pixel_class picture[500][300]; 
+ 
+int main() { 
+  int x, y; 
+  fstream myfile; 
+  createpicture(); 
+  filename = "myImage.ppm"; 
+  myfile.open(filename.c_str(), fstream::out); 
+  myfile << "# " << filename << endl; 
+  myfile << 250 << " " << 100 << endl; 
+  myfile << 256 << endl; 
+  for (y = 0; y < 300; y++) { 
+    for (x = 0; x < 500; x++) { 
+      picture[x][y].datatofile(myfile); 
+    } 
+    myfile << endl; 
+  } 
+  myfile.close(); 
+} 
+ 
+void createpicture() { 
+  int x, y; 
+  for (y = 0; y < 300; y++) { 
+    for (x = 0; x < 500; x++) { 
+      picture[x][y].loaddata(255, 153, 0); 
+    } 
+  } 
+} 
+ 
+//--------------- methods for the pixel_class ------------ 
+void pixel_class::loaddata(int v1, int v2, int v3) { 
+  red = v1; 
+  green = v2; 
+  blue = v3; 
+} 
+ 
+void pixel_class::datatofile(fstream & ppmfile) { 
+  // write the data for one pixel to the ppm file 
+  ppmfile << red << " " << green; 
+  ppmfile << " " << blue << "  "; 
+} 
+ 

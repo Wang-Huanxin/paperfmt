@@ -1,0 +1,8 @@
+1. Answer one: the screen resolution is 1920x1080.
+2. Answer two: RGB yellow is 255 255 0.
+3. Answer three: the cyan program sets red, green and blue to 0, 255, 255.
+4. Answer four: equal RGB values give a grey shade.
+5. Answer five: the first four lines of smallimage.ppm.
+5. Answer six: I invented a simple tricolour flag.
+7. Answer seven: F: changes the current drive to F.
+8. Answer eight: the five errors are in the function declaration, the filename type, the array bounds, the loop bounds and the ppm header value.

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>版式 · 论文模板自动排版工作台</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div class="grain"></div>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">版</span>
+    <div>
+      <h1>PAPER FORMAT STUDIO</h1>
+      <p>模板驱动的论文 / 实验报告自动排版与回读校验</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <span class="pill">模板逐条解析</span>
+    <span class="pill">导出后回读校验</span>
+    <span class="pill">意见驱动返修</span>
+    <a class="ghost-link" href="#studio">开始排版</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">NEW WORKSPACE · 独立于旧站，不影响原有功能</p>
+      <h2>把论文对齐模板，<br /><em>而不是对齐运气。</em></h2>
+      <p class="lede">上传论文、题目文件与模板（文件或文字均可）。系统会逐条读出模板里的字体、字号、缩进、行距、对齐，重新生成 DOCX，并把导出文件重新读一遍做逐段校验，而不是“看起来差不多”。</p>
+      <div class="hero-actions">
+        <button class="primary" id="scrollBtn">上传文件，开始排版</button>
+        <button class="secondary" id="demoBtn">先看导出效果示例</button>
+      </div>
+      <div class="hero-meta">
+        <span>支持 DOCX / DOC / PDF / TXT</span>
+        <span>导出可选，预览即示例</span>
+        <span>中英文同字体同字号</span>
+      </div>
+    </div>
+    <div class="hero-figure" aria-hidden="true">
+      <div class="sheet">
+        <div class="sheet-line center w60"></div>
+        <div class="sheet-line center w40"></div>
+        <div class="sheet-gap"></div>
+        <div class="sheet-line w90"></div>
+        <div class="sheet-line w85"></div>
+        <div class="sheet-line w92"></div>
+        <div class="sheet-line w70"></div>
+        <div class="sheet-gap"></div>
+        <div class="sheet-line w88"></div>
+        <div class="sheet-line w80"></div>
+        <div class="sheet-line w95"></div>
+        <div class="sheet-badge">黑体 · 15pt · 1.5×</div>
+      </div>
+      <div class="check-card">
+        <span class="check-mark">✓</span>
+        <div>
+          <b>正文宋体 12pt</b>
+          <p>回读 DOCX 后逐段核对：13/13 段通过</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio" id="studio">
+    <div class="section-head">
+      <span class="step-no">01</span>
+      <div>
+        <h3>准备材料</h3>
+        <p>论文文件必传；题目文件可选，用于补题与核对题号；模板必须提供文件或文字之一。</p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card upload-card">
+        <div class="card-head">
+          <span class="label">论文文件</span>
+          <span class="req">必填</span>
+        </div>
+        <div class="drop" id="dropPaper">
+          <div class="drop-icon">＋</div>
+          <p class="drop-title">拖入论文，或点击选择</p>
+          <p class="drop-sub">DOCX / DOC / PDF / TXT，≤ 30MB</p>
+          <input type="file" id="filePaper" accept=".docx,.doc,.pdf,.txt" hidden />
+        </div>
+        <div class="file-chip" id="chipPaper" hidden></div>
+        <p class="hint">DOCX 能保留图片与更准确的分段；PDF 适合纯文字题目或文稿。</p>
+      </div>
+
+      <div class="card template-card">
+        <div class="card-head">
+          <span class="label">模板来源</span>
+          <span class="req">二选一</span>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="file">上传模板文件</button>
+          <button class="tab" data-tab="text">直接输入格式要求</button>
+        </div>
+        <div class="tab-pane" data-pane="file">
+          <div class="drop small" id="dropTemplate">
+            <div class="drop-icon">＋</div>
+            <p class="drop-title">拖入模板，或点击选择</p>
+            <p class="drop-sub">DOCX / DOC / PDF / TXT</p>
+            <input type="file" id="fileTemplate" accept=".docx,.doc,.pdf,.txt" hidden />
+          </div>
+          <div class="file-chip" id="chipTemplate" hidden></div>
+          <p class="hint">模板中的【注：正文小四号宋体…】等格式说明会被逐条解析。</p>
+        </div>
+        <div class="tab-pane" data-pane="text" hidden>
+          <textarea id="templateText" rows="7" placeholder="例如：&#10;【文件首部格式：小三号、黑体、加粗、居中、1.5倍行距】&#10;标题小四号、黑体、加粗、无缩进、1.5倍行距；&#10;正文小四号宋体，首行缩进2字符、1.5倍行距。”"></textarea>
+          <p class="hint">支持“小三 / 小四 / 五号”、宋体 / 仿宋 / 黑体、加粗、居中、首行缩进、1.5倍行距等表述。</p>
+        </div>
+      </div>
+
+      <div class="card extra-card">
+        <div class="card-head">
+          <span class="label">补充信息</span>
+          <span class="opt">可选</span>
+        </div>
+        <div class="field">
+          <span>题目文件（用于补题 / 核对题号）</span>
+          <div class="mini-drop" id="dropQuestions">
+            选择题目 PDF 或 DOCX
+            <input type="file" id="fileQuestions" accept=".docx,.doc,.pdf,.txt" hidden />
+          </div>
+          <div class="file-chip" id="chipQuestions" hidden></div>
+        </div>
+        <div class="field-row">
+          <label>班级<input type="text" id="className" placeholder="物联网NZ252" /></label>
+          <label>姓名<input type="text" id="studentName" placeholder="王焕鑫" /></label>
+        </div>
+        <div class="field-row">
+          <label>学号<input type="text" id="studentId" placeholder="257037" /></label>
+          <label>Workshop<input type="text" id="workshop" placeholder="9" /></label>
+        </div>
+        <div class="field-row">
+          <label>报告标题<input type="text" id="caption" placeholder="计算思维与算法实验报告" /></label>
+          <label>语言<select id="lang"><option value="zh">中文（按模板）</option><option value="en">英文版（字体不变）</option></select></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="run-bar">
+      <div class="run-note">
+        <b>排版会做什么：</b>解析模板 → 识别题目 → 生成 DOCX → 回读该 DOCX 逐段校验。
+      </div>
+      <button class="primary large" id="runBtn">开始自动排版 →</button>
+    </div>
+    <div class="loading" id="loading" hidden>
+      <div class="spinner"></div>
+      <div>
+        <b id="loadingTitle">正在解析模板与文档…</b>
+        <p id="loadingSub">读取格式说明、拆分题目、生成并回读 DOCX</p>
+      </div>
+    </div>
+    <div class="error-box" id="errorBox" hidden></div>
+  </section>
+
+  <section class="result" id="result" hidden>
+    <div class="section-head">
+      <span class="step-no">02</span>
+      <div>
+        <h3>排版结果与导出示例</h3>
+        <p id="resultSub">预览就是导出的样子；导出是可选的，不导出也能保留这份预览。</p>
+      </div>
+    </div>
+
+    <div class="statbar" id="statbar"></div>
+    <div class="notice-list" id="noticeList"></div>
+
+    <div class="result-grid">
+      <div class="preview-panel">
+        <div class="panel-head">
+          <span>导出效果示例 · A4</span>
+          <div class="panel-tools">
+            <span class="legend" id="selLegend">点击段落可选中，便于精确返修</span>
+            <button class="chip-btn" id="zoomOut">－</button>
+            <button class="chip-btn" id="zoomIn">＋</button>
+          </div>
+        </div>
+        <div class="paper-stage" id="paperStage">
+          <div class="pages" id="pages"></div>
+        </div>
+        <div class="export-row">
+          <button class="primary" id="exportBtn">导出 DOCX</button>
+          <button class="secondary" id="skipExportBtn">暂不导出，仅保留预览</button>
+          <span class="export-hint">两种选择都不影响校验报告与修改意见。</span>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="tabs side-tabs">
+          <button class="tab active" data-side="report">校验报告</button>
+          <button class="tab" data-side="questions">题目清单</button>
+          <button class="tab" data-side="feedback">修改意见</button>
+          <button class="tab" data-side="history">修改记录</button>
+        </div>
+
+        <div class="side-pane" data-side="report">
+          <div class="report-sum" id="reportSum"></div>
+          <div class="checks" id="checks"></div>
+          <button class="secondary wide" id="fixAllBtn">按模板一键全量修正</button>
+        </div>
+
+        <div class="side-pane" data-side="questions" hidden>
+          <div class="qlist" id="qlist"></div>
+        </div>
+
+        <div class="side-pane" data-side="feedback" hidden>
+          <div class="feedback-box">
+            <div class="fb-title">告诉系统哪里不满意</div>
+            <p class="fb-sub">不必说明改成什么格式。描述问题即可：系统会重新读取模板/题目文件后自行修正，并给出证据。</p>
+            <textarea id="feedbackText" rows="5" placeholder="例如：这一段的英文格式不一致，有的符合要求有的不符合；文件里要正文仿宋，你做完之后却不是。"></textarea>
+            <div class="chips" id="fbChips">
+              <button class="chip">正文应该是仿宋，你做完却不是</button>
+              <button class="chip">第8题没识别上，请重读题目文件补上</button>
+              <button class="chip">第5题和第6题被合并成一题了</button>
+              <button class="chip">这段英文格式不一致，有的符合有的不符合</button>
+              <button class="chip">全文翻译成英文版，字体不要变</button>
+              <button class="chip">预览里有文字超出了页面</button>
+            </div>
+            <div class="selection-chip" id="selectionChip" hidden></div>
+            <div class="fb-actions">
+              <button class="primary" id="fbBtn">提交修改意见</button>
+              <button class="secondary" id="reapplyBtn">重新读取模板并全量重排</button>
+            </div>
+            <div class="fb-status" id="fbStatus" hidden></div>
+          </div>
+        </div>
+
+        <div class="side-pane" data-side="history" hidden>
+          <div class="rounds" id="rounds"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div>
+      <h3>为什么它敢说“符合模板”</h3>
+      <p>生成 DOCX 后，系统会解压文件、读取 document.xml，按段落样式逐条检查 ascii / eastAsia / hAnsi / cs 四个字体槽、字号、加粗、对齐、首行缩进、行距与页边距，并单独核对 1…N 题号是否连续、是否有重复或合并。</p>
+    </div>
+    <div>
+      <h3>不满意时会发生什么</h3>
+      <p>你只需指出问题。系统会重新读取原模板与题目文件、重新生成并再次校验；如果模板里确实没写你要求的字体，它会明确标注“用户指定”，而不是假装模板里有。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>PAPER FORMAT STUDIO</span>
+  <span>新工作台独立部署 · 不改动原有站点</span>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -11,9 +11,13 @@
 
 ## 运行
 
+```bash
 npm install
 node server.js
+```
 
 ## 测试
 
+```bash
 node scripts/test-pipeline.js
+```
